@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>WriterMap</title>
+<meta name="description" content="WriterMap: mapas mentais visuais para escritores esboçarem suas histórias.">
+<meta name="theme-color" content="#f6f6f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1b1f" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="WriterMap">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="vp">
+  <div id="world">
+    <svg id="edges" width="1" height="1" aria-hidden="true">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ar" d="M0 0L10 5L0 10z"/></marker>
+        <marker id="arS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arS" d="M0 0L10 5L0 10z"/></marker>
+      </defs>
+      <g id="eg"></g>
+      <path id="tmp" d=""/>
+    </svg>
+    <div id="nodes"></div>
+  </div>
+  <div id="empty" hidden>Mapa vazio.<br>Toque em <b>＋ Nó</b> para começar sua história.</div>
+</div>
+
+<header id="top">
+  <button id="b-menu" data-act="menu" aria-label="Menu e mapas">☰</button>
+  <input id="title" maxlength="80" spellcheck="false" aria-label="Nome do mapa" placeholder="Nome do mapa">
+  <div class="zoom">
+    <button data-act="zout" aria-label="Diminuir zoom">−</button>
+    <span id="zl">100%</span>
+    <button data-act="zin" aria-label="Aumentar zoom">＋</button>
+    <button data-act="fit" aria-label="Ajustar à tela" title="Ajustar à tela (Ctrl+0)">⤢</button>
+  </div>
+</header>
+
+<nav id="bar" aria-label="Ferramentas">
+  <button data-act="add" title="Novo nó solto"><i>＋</i>Nó</button>
+  <button data-act="child" data-for="n" title="Novo filho (Tab)"><i>↳</i>Filho</button>
+  <button data-act="sibling" data-for="n" title="Novo irmão (Shift+Enter)"><i>⇣</i>Irmão</button>
+  <button data-act="edit" data-for="n" title="Editar texto (Enter)"><i>✎</i>Editar</button>
+  <span class="sep" data-for="n"></span>
+  <span class="sws" data-for="n">
+    <button class="sw" data-act="color" data-c="0" title="Neutro" aria-label="Neutro"></button>
+    <button class="sw" data-act="color" data-c="1" title="Conflito" aria-label="Conflito"></button>
+    <button class="sw" data-act="color" data-c="2" title="Cena" aria-label="Cena"></button>
+    <button class="sw" data-act="color" data-c="3" title="Ideia" aria-label="Ideia"></button>
+    <button class="sw" data-act="color" data-c="4" title="Personagem" aria-label="Personagem"></button>
+    <button class="sw" data-act="color" data-c="5" title="Local" aria-label="Local"></button>
+    <button class="sw" data-act="color" data-c="6" title="Tema" aria-label="Tema"></button>
+  </span>
+  <button data-act="flip" data-for="e" title="Inverter direção da seta"><i>⇄</i>Inverter</button>
+  <button data-act="del" data-for="s" class="danger" title="Excluir (Delete)"><i>🗑</i>Excluir</button>
+  <span class="sep"></span>
+  <button data-act="undo" id="b-undo" title="Desfazer (Ctrl+Z)"><i>↶</i>Voltar</button>
+  <button data-act="redo" id="b-redo" title="Refazer (Ctrl+Shift+Z)"><i>↷</i>Refazer</button>
+</nav>
+
+<div id="panel" hidden>
+  <div class="sheet" role="dialog" aria-label="Meus mapas">
+    <div class="sh-h"><b>Meus mapas</b><button id="p-close" aria-label="Fechar">✕</button></div>
+    <ul id="list"></ul>
+    <div class="acts">
+      <button data-p="new">＋ Novo mapa</button>
+      <button data-p="json">⬇ Exportar mapa (.json)</button>
+      <button data-p="md">⬇ Exportar esboço (.md)</button>
+      <button data-p="import">⬆ Importar mapa (.json)</button>
+      <button data-p="install" id="btn-install" hidden>📲 Instalar o app</button>
+    </div>
+    <details class="help">
+      <summary>Como usar</summary>
+      <ul>
+        <li><b>Mover a tela:</b> arraste o fundo. <b>Zoom:</b> roda do mouse ou pinça com dois dedos.</li>
+        <li><b>Editar:</b> toque duas vezes na caixa (ou Enter). Enter salva; Shift+Enter quebra linha.</li>
+        <li><b>Ligar caixas:</b> selecione a caixa e arraste a bolinha da direita até outra caixa. Soltando em espaço vazio, nasce uma nova caixa já ligada.</li>
+        <li><b>Largura:</b> arraste o canto inferior direito da caixa selecionada.</li>
+        <li><b>Atalhos:</b> Tab = filho · Shift+Enter = irmão · Delete = excluir · Ctrl+Z / Ctrl+Shift+Z = desfazer / refazer · Ctrl+0 = ajustar.</li>
+        <li><b>Cores:</b> Conflito, Cena, Ideia, Personagem, Local e Tema.</li>
+        <li><b>iPhone/iPad:</b> para instalar, toque em Compartilhar → Adicionar à Tela de Início.</li>
+        <li>Tudo é salvo automaticamente neste aparelho e funciona offline.</li>
+      </ul>
+    </details>
+  </div>
+</div>
+
+<input type="file" id="file" accept=".json,application/json" hidden>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
