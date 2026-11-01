@@ -5,7 +5,7 @@
 O WriterMap é um aplicativo web (PWA) simples e rápido para planejar enredos, personagens, cenários e capítulos em um mapa visual, no estilo dos mapas mentais do Obsidian. Ele funciona no celular, tablet e computador, pode ser instalado como um app e **funciona sem internet**.
 
 
-![WriterMap - eu app de mapas mentais!](WriterMap-escritores.png)
+![WriterMap - eu app de mapas mentais!](imagens/WriterMap-escritores.png)
 
 ---
 
