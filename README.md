@@ -3,6 +3,10 @@
 **Mapas mentais visuais para escritores esboçarem suas histórias.**
 
 O WriterMap é um aplicativo web (PWA) simples e rápido para planejar enredos, personagens, cenários e capítulos em um mapa visual, no estilo dos mapas mentais do Obsidian. Ele funciona no celular, tablet e computador, pode ser instalado como um app e **funciona sem internet**.
+
+
+![WriterMap - eu app de mapas mentais!](WriterMap-escritores.png)
+
 ---
 
 ## Sumário
@@ -26,7 +30,6 @@ O WriterMap é um aplicativo web (PWA) simples e rápido para planejar enredos, 
 17. [Limites e privacidade](#17-limites-e-privacidade)
 18. [Estrutura dos arquivos](#18-estrutura-dos-arquivos)
 
-![WriterMap - eu app de mapas mentais!](WriterMap-escritores.png)
 ---
 
 ## 1. Visão geral
