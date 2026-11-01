@@ -44,7 +44,13 @@ O WriterMap é um aplicativo web (PWA) simples e rápido para planejar enredos, 
 | Exportar | Mapa completo em `.json` e esboço em texto `.md` |
 | Instalável | Vira um app na tela inicial ou na área de trabalho |
 
+![Interface do WriterMap](imagens/WriterMap.png)
+
 ---
+
+
+
+
 
 ## 2. Instalação e uso
 
